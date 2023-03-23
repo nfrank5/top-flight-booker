@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
+require 'faker'
 if Airport.none?
   Airport.create([{airport_code: "ATL", airport_name: "Hartsfield Jackson Atlanta International Airport"},
                   {airport_code: "PEK", airport_name: "Beijing Capital International Airport"},
@@ -26,21 +26,22 @@ if Airport.none?
                   {airport_code: "AMS", airport_name: "Amsterdam Airport Schiphol"}, 
                   {airport_code: "JFK", airport_name: "John F Kennedy International Airport"}, 
                   {airport_code: "CAN", airport_name: "Guangzhou Baiyun International Airport"}, 
-                  {airport_code: "MAD", airport_name: "Barajas International Airport"}, 
-                  {airport_code: "IST", airport_name: "Atatürk International Airport"}, 
-                  {airport_code: "PVG", airport_name: "Shanghai Pudong International Airport"}, 
-                  {airport_code: "SFO", airport_name: "San Francisco International Airport"}, 
-                  {airport_code: "LAS", airport_name: "McCarran International Airport"}, 
-                  {airport_code: "CLT", airport_name: "Charlotte Douglas International Airport"}, 
-                  {airport_code: "PHX", airport_name: "Sky Harbor International Airport"}, 
-                  {airport_code: "IAH", airport_name: "George Bush Intercontinental Airport"}, 
-                  {airport_code: "KUL", airport_name: "Kuala Lumpur International Airport"}, 
-                  {airport_code: "MIA", airport_name: "Miami International Airport"}, 
-                  {airport_code: "ICN", airport_name: "Incheon International Airport"}, 
-                  {airport_code: "MUC", airport_name: "Franz Josef Strauss International Airport"}
+                  {airport_code: "MAD", airport_name: "Barajas International Airport"}
                   ])
 end
 
+FLIGHT_DURATIONS = [304, 503, 57, 129, 80, 75]
+
 if Flight.none?
-  Flight.create([{departure_airport_id:1, arrival_airport_id: 2, start_date: Time.now, flight_duration:20}])
+  15.times { |i|
+    20.times { |j|
+      20.times { |k|
+                  Flight.create({ departure_airport_id: j,
+                                  arrival_airport_id: k, 
+                                  start_date: Faker::Time.forward(days: 180),
+                                  flight_duration: FLIGHT_DURATIONS[i % 6] 
+                                })
+                }
+              }
+            }
 end

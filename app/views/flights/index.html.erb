@@ -1,0 +1,31 @@
+<h1>Search for flights</h1>
+
+<%= form_with url: "/flights", method: :get do |form| %>
+
+  <%= form.label :departure_airport_id, "Departure Airport:" %>
+  <%= form.select(:departure_airport_id, options_for_select(@airports)) %><br> 
+  <%= form.label :arrival_airport_id, "Arrival Airport:" %>
+  <%= form.select(:arrival_airport_id, options_for_select(@airports)) %><br>
+  <%= form.label :passangers_qty, "Passangers Quantity:" %>
+  <%= form.select(:passangers_qty, options_for_select((1..4).to_a)) %><br>
+  <%= form.label :flight_date, "Date (Year/Month/Day):" %>
+  <%= form.select(:flight_date, options_for_select(@flight_dates)) %><br>
+  <%= form.submit "Search" %>
+  
+<% end %>
+
+
+<h2>Flights available</h2>
+  <% if @flights_available.empty? %>
+    <p>None flight available</p>
+  <% else %>
+    <% @flights_available.each do |f| %>
+    <li>Departure Airport: <%= f.departure_airport.airport_code %></li>
+    <li>Arrival Airport: <%= f.arrival_airport.airport_code %></li>
+    <li>Departure Date: <%= f.start_date %></li>
+    <br>
+    <% end %>
+  <% end %>
+
+
+
