@@ -15,34 +15,20 @@
 <% end %>
 
 
-<h2>Flights available</h2>
-  <% if @flights_available.empty? %>
-    <p>None flight available</p>
-  <% else %>
-    <% @flights_available.each do |f| %>
-    <li>Departure Airport: <%= f.departure_airport.airport_code %></li>
-    <li>Arrival Airport: <%= f.arrival_airport.airport_code %></li>
-    <li>Departure Date: <%= f.start_date %></li>
-    <br>
-    <% end %>
-  <% end %>
 
- <%
-=begin%>
-  <h2>Flights available</h2>
-  <% if @flights_available.empty? %>
-    <p>No flight available</p>
-  <% else %>
-    <%= form_with model: @booking, url: new_booking_path , method: :get do |form| %>
-      <%= form.collection_radio_buttons :id, @flights_available, :id, :flight_details do |b| %>
-        <%= b.radio_button %> <%= b.label %><br>
-      <% end %><br>
-      <%= form.hidden_field :passangers_qty, value: params[:passangers_qty] %>
-      <%= form.submit "Book Flight" %>
-    <% end %>
-  <% end %> 
-<%
-=end%>
+<h2>Flights available</h2>
+<% if @flights_available.empty? %>
+  <p>No flight available</p>
+<% else %>
+  <%= form_with model: @booking, url: new_booking_path , method: :get do |form| %>
+    <%= form.collection_radio_buttons :id, @flights_available, :id, :flight_details do |b| %>
+      <%= b.radio_button %> <%= b.label %><br>
+    <% end %><br>
+    <%= form.hidden_field :passangers_qty, value: params[:passangers_qty] %>
+    <%= form.submit "Book Flight" %>
+  <% end %>
+<% end %> 
+
 
 
 

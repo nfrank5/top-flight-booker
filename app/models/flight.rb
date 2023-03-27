@@ -10,4 +10,8 @@ class Flight < ApplicationRecord
       "#{f.start_date.year}/#{f.start_date.month}/#{f.start_date.day}" == search_params[:flight_date]
     end
   end
+
+  def flight_details
+    "Departure Airport: #{departure_airport.airport_code} - Arrival Airport: #{arrival_airport.airport_code} - Date: #{start_date.strftime("%d %B %Y - Departure Time: %H:%M")}"
+  end
 end
