@@ -5,7 +5,7 @@
   <%= form.label :departure_airport_id, "Departure Airport:" %>
   <%= form.select(:departure_airport_id, options_for_select(@airports)) %><br> 
   <%= form.label :arrival_airport_id, "Arrival Airport:" %>
-  <%= form.select(:arrival_airport_id, options_for_select(@airports)) %><br>
+  <%= form.select(:arrival_airport_id, options_for_select(@airports, selected: 2)) %><br>
   <%= form.label :passangers_qty, "Passangers Quantity:" %>
   <%= form.select(:passangers_qty, options_for_select((1..4).to_a)) %><br>
   <%= form.label :flight_date, "Date (Year/Month/Day):" %>

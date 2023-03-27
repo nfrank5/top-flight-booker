@@ -1,7 +1,7 @@
 <h1>Booking</h1>
 <h2>Flight</h2>
 <%= form_with model: @booking do |form| %>
-  <%= Flight.find(params[:id]).flight_details %><br>
+  <%= Flight.find(params[:id]).flight_details %>, Flight ID: <%=params[:id]%><br>
   <h2>Passengers:</h2>
   <ul>
     <%= form.fields_for :passengers do |passengers_form| %>
