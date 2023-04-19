@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
   end
 
   def create
+    p params[:passangers_qty]
     @booking = Booking.create(booking_params)
     redirect_to booking_path(@booking)
   end
@@ -15,7 +16,7 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email, :id])
+    params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email, :id, :_destroy])
   end
 
 end
