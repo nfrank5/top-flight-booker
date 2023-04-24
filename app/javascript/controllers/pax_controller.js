@@ -14,4 +14,9 @@ export default class extends Controller {
     const clone = template.content.cloneNode(true)
     this.paxListTarget.appendChild(clone)
   }
+
+  buildIndex(){
+    fetch(this.indexValue).then(this.indexValue++)
+    console.log(this.indexValue)
+  }
 }
