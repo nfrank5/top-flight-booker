@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your booking details for  your flight <%= @passenger.name %>,</h1>
+    
+    <p><%= @passenger.name %> have successfully booked the following flight:</p>
+    <p><%= params[:flight].flight_details %></p>
+    <p>You will recive updates at the following E-mail: <%= @passenger.email %>.</p>
+    
+    <p>To verify you flight, just follow this link: <%= @url %>.</p> 
+    <p>Thanks for your booking and have a great day!</p>
+  </body>
+</html>

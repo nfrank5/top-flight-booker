@@ -6,6 +6,11 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.create(booking_params)
+    p Flight.find(booking_params[:flight_id])
+    @flight = Flight.find(booking_params[:flight_id])
+    @booking.passengers.each do |pax|
+      PassengerMailer.with(flight: @flight).confirmation_email(pax).deliver_now
+    end
     redirect_to booking_path(@booking)
   end
 

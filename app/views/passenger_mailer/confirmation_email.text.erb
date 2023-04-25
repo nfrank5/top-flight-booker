@@ -1,0 +1,12 @@
+Your booking details for  your flight <%= @passenger.name %>,
+===============================================
+
+<%= @passenger.name %> have successfully booked the following flight:
+
+<%= params[:flight].flight_details %>
+
+You will recive updates at the following E-mail: <%= @passenger.email %>.
+
+To verify you flight, just follow this link: <%= @url %>.
+
+Thanks for your booking and have a great day!
