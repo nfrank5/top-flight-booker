@@ -5,7 +5,6 @@ class BookingsController < ApplicationController
   end
 
   def create
-    p params[:passangers_qty]
     @booking = Booking.create(booking_params)
     redirect_to booking_path(@booking)
   end
