@@ -5,7 +5,7 @@
 <div data-controller="pax"
     data-pax-index-value=<%= params[:passangers_qty] %>>
       <%= form_with model: @booking do |form| %>
-            <div data-pax-target= "paxList">
+            <ol data-pax-target= "paxList">
               <%= form.fields_for :passengers do |passengers_form| %>
                   <template data-pax-target="emptyPax">
                         <li>
@@ -13,6 +13,7 @@
                           <%= passengers_form.text_field :name %>
                           <%= passengers_form.label :email %>
                           <%= passengers_form.text_field :email %>
+                          <%= button_tag('Remove Passenger', type: 'button', data: { action: "click->pax#removePax" })  %>
                           <br>
                         </li>
                   </template>
@@ -21,14 +22,15 @@
                     <%= passengers_form.text_field :name %>
                     <%= passengers_form.label :email %>
                     <%= passengers_form.text_field :email %>
+                    <%= button_tag('Remove Passenger', type: 'button', data: { action: "click->pax#removePax" })  %>
                     <br>
                   </li>    
               <% end %>
-            </div>  
-            
+            </ol>  
         <%= button_tag('Add Passenger', type: 'button', data: {action: "click->pax#addPax"})  %>
         <%= form.hidden_field :flight_id, value: params[:id] %>
         <%= form.submit("Create Booking") %>
+        <div data-pax-target="lastPax"></div>
       <% end %>
 
 </div>
