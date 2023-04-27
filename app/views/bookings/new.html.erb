@@ -1,18 +1,36 @@
 <h1>Booking</h1>
 <h2>Flight</h2>
-<%= form_with model: @booking do |form| %>
-  <%= Flight.find(params[:id]).flight_details %>, Flight ID: <%=params[:id]%><br>
-  <h2>Passengers:</h2>
-  <ul>
-    <%= form.fields_for :passengers do |passengers_form| %>
-      <li>
-        <%= passengers_form.label :name %>
-        <%= passengers_form.text_field :name %>
-        <%= passengers_form.label :email %>
-        <%= passengers_form.text_field :email %>
-      </li>
-    <% end %>
-  </ul>
-  <%= form.hidden_field :flight_id, value: params[:id] %>
-  <%= form.submit("Create Booking") %>
-<% end %>
+<%= Flight.find(params[:id]).flight_details %>, Flight ID: <%=params[:id]%><br>
+<h2>Passengers:</h2>
+<div data-controller="pax"
+    data-pax-index-value=<%= params[:passangers_qty] %>>
+      <%= form_with model: @booking do |form| %>
+            <ol data-pax-target= "paxList">
+              <%= form.fields_for :passengers do |passengers_form| %>
+                  <template data-pax-target="emptyPax">
+                        <li>
+                          <%= passengers_form.label :name %>
+                          <%= passengers_form.text_field :name %>
+                          <%= passengers_form.label :email %>
+                          <%= passengers_form.text_field :email %>
+                          <%= button_tag('Remove Passenger', type: 'button', data: { action: "click->pax#removePax" })  %>
+                          <br>
+                        </li>
+                  </template>
+                  <li>
+                    <%= passengers_form.label :name %>
+                    <%= passengers_form.text_field :name %>
+                    <%= passengers_form.label :email %>
+                    <%= passengers_form.text_field :email %>
+                    <%= button_tag('Remove Passenger', type: 'button', data: { action: "click->pax#removePax" })  %>
+                    <br>
+                  </li>    
+              <% end %>
+            </ol>  
+        <%= button_tag('Add Passenger', type: 'button', data: {action: "click->pax#addPax"})  %>
+        <%= form.hidden_field :flight_id, value: params[:id] %>
+        <%= form.submit("Create Booking") %>
+        <div data-pax-target="lastPax"></div>
+      <% end %>
+
+</div>
